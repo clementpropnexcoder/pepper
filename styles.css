@@ -176,21 +176,41 @@ em { font-style: italic; }
 @media (max-width: 860px) { .roe-grid { grid-template-columns: 1fr; } .roe-chart { margin-top: 6px; } }
 
 /* ===================== RECOGNITION (portfolio grid) ===================== */
-.recognition { padding-top: var(--pad-y); padding-bottom: 0; background: var(--ivory); }
+.recognition { padding-top: var(--pad-y); padding-bottom: var(--pad-y); background: var(--sand); }
 .section-head { max-width: 720px; margin-bottom: clamp(40px, 6vw, 72px); }
+.section-head.center { max-width: 680px; margin-inline: auto; text-align: center; }
+.section-head.center .section-sub { margin-inline: auto; }
 .section-head h2 { margin-bottom: 1rem; }
 .section-sub { color: var(--muted); font-size: 1.05rem; max-width: 52ch; margin: 0; }
-.folio { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--gray); border-left: 1px solid var(--gray); }
-.folio-cell {
-  border-right: 1px solid var(--gray); border-bottom: 1px solid var(--gray);
-  padding: clamp(28px, 3vw, 44px); min-height: 230px;
-  display: flex; flex-direction: column; position: relative;
-  transition: background-color .25s ease;
+
+.award-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(16px, 1.6vw, 22px); }
+.award-card {
+  background: #FCFAF5; border: 1px solid var(--gray); border-radius: 14px;
+  padding: clamp(22px, 2.2vw, 30px); min-height: 230px;
+  display: flex; flex-direction: column;
+  box-shadow: 0 6px 20px rgba(60,48,28,0.06);
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
 }
-.folio-cell:hover { background: var(--sand); }
-.folio-meta { font-size: 0.74rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
-.folio-cell h3 { margin: auto 0 0; font-size: clamp(1.5rem, 2.4vw, 2.1rem); color: var(--bronze); }
-.folio-tag { position: absolute; top: clamp(28px, 3vw, 44px); right: clamp(28px, 3vw, 44px); font-family: var(--display); font-weight: 800; font-size: 1.1rem; color: var(--gold); }
+.award-card:hover { transform: translateY(-4px); box-shadow: 0 16px 38px rgba(60,48,28,0.12); border-color: var(--gold); }
+.award-top { display: flex; align-items: center; justify-content: space-between; gap: 14px; margin-bottom: 16px; }
+.award-badge {
+  font-family: var(--display); font-weight: 800; font-size: 1.05rem;
+  background: rgba(197,155,79,0.14); color: var(--bronze);
+  border: 1px solid var(--gold); border-radius: 999px; padding: 5px 15px; min-width: 46px; text-align: center; flex: none;
+}
+.award-years { font-size: 0.78rem; letter-spacing: 0.03em; color: var(--muted); text-align: right; line-height: 1.5; }
+.award-card h3 { font-size: clamp(1.3rem, 1.9vw, 1.6rem); color: var(--bronze); margin: 0 0 10px; }
+.award-card p { font-size: 0.93rem; color: #5b5346; margin: 0; line-height: 1.55; }
+.award-card--feature { background: linear-gradient(150deg, var(--forest) 0%, var(--forest-d) 100%); border-color: transparent; box-shadow: 0 10px 28px rgba(40,55,41,0.22); }
+.award-card--feature h3 { color: #fff; }
+.award-card--feature p { color: rgba(255,255,255,0.82); }
+.award-card--feature .award-badge { background: rgba(217,175,99,0.2); color: var(--gold-2); border-color: var(--gold-2); }
+.award-card--feature .award-years { color: rgba(255,255,255,0.6); }
+.award-badge--star { display: inline-grid; place-items: center; padding: 0; width: 42px; height: 42px; }
+.award-badge--star svg { width: 20px; height: 20px; }
+.award-card--photo { padding: 0; overflow: hidden; position: relative; }
+.award-card--photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 20%; }
+.award-photo-cap { position: absolute; left: 0; right: 0; bottom: 0; background: linear-gradient(transparent, rgba(31,31,31,0.78)); color: #fff; padding: 28px 20px 16px; font-size: 0.86rem; font-weight: 600; letter-spacing: 0.03em; }
 
 
 /* ===================== APPROACH (numbered) ===================== */
@@ -245,7 +265,7 @@ em { font-style: italic; }
 .wa-tab:focus-visible { outline: 3px solid var(--forest); outline-offset: 3px; }
 
 /* ===================== REVIEWS ===================== */
-.reviews { background: var(--sand); padding-block: var(--pad-y); }
+.reviews { background: var(--ivory); padding-block: var(--pad-y); }
 .reviews-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 28px 40px; flex-wrap: wrap; margin-bottom: clamp(36px, 5vw, 56px); }
 .reviews-head h2 { color: var(--bronze); }
 .reviews-score { display: grid; justify-items: end; text-align: right; gap: 2px; }
@@ -351,7 +371,7 @@ em { font-style: italic; }
   .split-pane { grid-template-columns: 1fr; }
   .split-media { min-height: 0; aspect-ratio: 4 / 3; order: -1; }
   .contact-grid { grid-template-columns: 1fr; }
-  .folio { grid-template-columns: repeat(2, 1fr); }
+  .award-grid { grid-template-columns: repeat(2, 1fr); }
   .steps { grid-template-columns: repeat(2, 1fr); }
   .step { border-bottom: 1px solid var(--gray); padding-right: 24px; }
   .step:nth-child(odd) { padding-left: 0; }
@@ -366,7 +386,7 @@ em { font-style: italic; }
   .nav-cta { display: none; }
 }
 @media (max-width: 560px) {
-  .folio { grid-template-columns: 1fr; }
+  .award-grid { grid-template-columns: 1fr; }
   .steps { grid-template-columns: 1fr; }
   .step { border-right: 0; padding: 26px 0; }
   .step:nth-child(even) { padding-left: 0; }
@@ -379,6 +399,7 @@ em { font-style: italic; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  * { transition-duration: .001ms !important; animation-duration: .001ms !important; }
-  .reveal { opacity: 1; transform: none; }
+  /* Keep one-time entrance reveals, hovers & the chart draw so the page still feels alive on mobile;
+     only stop the continuous, never-ending loops (background drift + pulsing pill). */
+  .spot-bg, .rank-pill { animation: none !important; }
 }
