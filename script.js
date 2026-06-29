@@ -201,11 +201,11 @@ const CONFIG = {
 
   /* Scroll reveal */
   const revealEls = document.querySelectorAll(
-    ".split-media, .split-body, .roe .wrap, .section-head, .folio-cell, .step, .contact-intro, .lead-form, .reviews-head, .review, .listings-text, .film-head, .film-player, .spot-head, .spot-safety, .spot-savings"
+    ".split-media, .split-body, .roe .wrap, .section-head, .award-card, .step, .contact-intro, .lead-form, .reviews-head, .review, .listings-text, .film-head, .film-player, .spot-head, .spot-safety, .spot-savings"
   );
   revealEls.forEach(function (el) { el.classList.add("reveal"); });
   // Stagger grouped items so they cascade in rather than snapping together.
-  [".folio-cell", ".step", ".review"].forEach(function (sel) {
+  [".award-card", ".step", ".review"].forEach(function (sel) {
     var group = document.querySelectorAll(sel);
     for (var i = 0; i < group.length; i++) {
       group[i].style.transitionDelay = ((i % 6) * 70) + "ms";
