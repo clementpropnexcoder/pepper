@@ -141,6 +141,7 @@ const CONFIG = {
     } else { loadFlyImages(); }
 
     var reduceMo = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var motionScale = reduceMo ? 0.4 : 1;   // still falls on phones w/ Reduce Motion / battery saver, just gentler
     var rnd = function (a, b) { return a + Math.random() * (b - a); };
     var smallScreen = function () { return window.innerWidth <= 600; };
     var H = 0, Wd = 0;
@@ -153,8 +154,8 @@ const CONFIG = {
       it._x = rnd(0.04, 0.96);                         // fraction of width — spans the full panel incl. the middle
       it._rot = rnd(-14, 14);
       it._drot = rnd(-5, 5);                           // slow rotation drift (deg/s)
-      it._speed = rnd(42, 96);                         // fall speed px/s
-      it._sway = rnd(6, 24);                           // gentle horizontal sway px
+      it._speed = rnd(42, 96) * motionScale;           // fall speed px/s
+      it._sway = rnd(6, 24) * motionScale;             // gentle horizontal sway px
       it._swaySpeed = rnd(0.25, 0.6);
       it._phase = rnd(0, 6.283);
       it._y = firstFill ? rnd(-H * 0.25, H) : -it._w - rnd(0, H * 0.4);
@@ -173,32 +174,29 @@ const CONFIG = {
     measure();
     flyItems.forEach(function (it) { resetItem(it, true); });
 
-    if (reduceMo) {
-      // Static scatter that still fills the panel (no motion).
-      flyItems.forEach(function (it) { it._y = rnd(0, Math.max(1, H - it._w)); place(it, 0); });
-    } else {
-      var last = 0, raf = 0, running = false;
-      var loop = function (ts) {
-        if (!running) return;
-        if (!last) last = ts;
-        var dt = Math.min(0.05, (ts - last) / 1000); last = ts;
-        var t = ts / 1000;
-        for (var i = 0; i < flyItems.length; i++) {
-          var it = flyItems[i];
-          it._y += it._speed * dt;
-          if (it._y > H + it._w) resetItem(it, false);   // recycle to the top
-          place(it, t);
-        }
-        raf = requestAnimationFrame(loop);
-      };
-      var start = function () { if (!running) { running = true; last = 0; raf = requestAnimationFrame(loop); } };
-      var stop = function () { running = false; if (raf) cancelAnimationFrame(raf); };
-      if ("IntersectionObserver" in window) {
-        new IntersectionObserver(function (es) { es[0].isIntersecting ? start() : stop(); }, { threshold: 0 }).observe(flySection);
-      } else { start(); }
-      var rT;
-      window.addEventListener("resize", function () { clearTimeout(rT); rT = setTimeout(measure, 200); }, { passive: true });
-    }
+    var last = 0, raf = 0, running = false;
+    var loop = function (ts) {
+      if (!running) return;
+      if (!last) last = ts;
+      var dt = Math.min(0.05, (ts - last) / 1000); last = ts;
+      var t = ts / 1000;
+      for (var i = 0; i < flyItems.length; i++) {
+        var it = flyItems[i];
+        it._y += it._speed * dt;
+        if (it._y > H + it._w) resetItem(it, false);   // recycle to the top
+        place(it, t);
+      }
+      raf = requestAnimationFrame(loop);
+    };
+    var start = function () { if (!running) { running = true; last = 0; raf = requestAnimationFrame(loop); } };
+    var stop = function () { running = false; if (raf) cancelAnimationFrame(raf); };
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(function (es) { es[0].isIntersecting ? start() : stop(); }, { threshold: 0 }).observe(flySection);
+    } else { start(); }
+    // Resume cleanly after the tab/app is backgrounded on mobile.
+    document.addEventListener("visibilitychange", function () { if (!document.hidden && running) { last = 0; } });
+    var rT;
+    window.addEventListener("resize", function () { clearTimeout(rT); rT = setTimeout(measure, 200); }, { passive: true });
   }
 
   /* Scroll reveal */
