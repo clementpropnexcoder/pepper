@@ -113,9 +113,21 @@ em { font-style: italic; }
 /* Mobile: the copy runs full width, so give the image vertical slack and
    lift it — puts his head in the top third, above where the copy starts. */
 @media (max-width: 860px) {
-  .hero-bg { height: 132%; top: -32%; bottom: auto; object-position: 30% 0%; }
+  .hero-bg { height: 148%; top: -46%; bottom: auto; object-position: 30% 0%; }
   /* the gold eyebrow landed across his mouth at this width */
   .hero .eyebrow { display: none; }
+  /* drop the secondary CTA so the copy block sits lower, clear of his face */
+  .hero-actions a.arrow.light { display: none; }
+}
+
+/* Short phone viewports (URL bar showing): the copy block eats the screen and
+   rides up over his face, so tighten it and lift the portrait further. */
+@media (max-width: 860px) and (max-height: 760px) {
+  .hero-bg { height: 168%; top: -68%; }
+  .hero-title { font-size: clamp(2.4rem, 10.5vw, 3.2rem); margin-bottom: 1rem; }
+  .hero-sub { font-size: 0.94rem; margin-bottom: 1.5rem; }
+  .rank-pill { font-size: 0.8rem; padding: 7px 14px; margin-bottom: 1.1rem; }
+  .rank-pill svg { width: 16px; height: 16px; }
 }
 @media (min-width: 861px) {
   .hero-inner { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 640px); }
@@ -132,8 +144,9 @@ em { font-style: italic; }
   0%, 100% { box-shadow: 0 0 16px rgba(217,175,99,0.32), 0 0 38px rgba(217,175,99,0.16); }
   50%      { box-shadow: 0 0 26px rgba(217,175,99,0.62), 0 0 64px rgba(217,175,99,0.34); }
 }
-/* On larger screens, pin the rank pill to the top-right, vertically centred on "Plan." */
-@media (min-width: 760px) {
+/* Pin the pill into the empty left column — only where the copy has actually
+   moved right (861px+), or it collides with the headline. */
+@media (min-width: 861px) {
   .rank-pill { position: absolute; top: 0; left: var(--gutter); right: auto; margin: 0; z-index: 3;
     background: linear-gradient(rgba(197,155,79,0.26), rgba(197,155,79,0.26)), rgba(31,27,22,0.66);
     border-width: 2px; padding: 12px 22px; font-size: clamp(0.92rem, 1.15vw, 1.05rem);
