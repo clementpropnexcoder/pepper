@@ -377,9 +377,7 @@ em { font-style: italic; }
 /* the headline comparison card carries a tag, a link and more weight */
 .saving.lead { grid-column: span 1; border-left: 3px solid var(--gold); padding-left: clamp(16px, 1.6vw, 22px); }
 .saving-tag { display: inline-block; margin-bottom: 10px; font-size: 0.66rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; color: var(--gold); }
-.saving.lead b { font-size: clamp(1.75rem, 3.1vw, 2.5rem); line-height: 1.05; }
-.saving.lead b .pct { display: inline; margin: 0; max-width: none; white-space: nowrap;
-  font-size: inherit; font-family: inherit; font-weight: inherit; color: inherit; letter-spacing: inherit; }
+.saving.lead b { line-height: 1.05; }
 .saving.lead span { max-width: 40ch; }
 .saving strong { color: var(--ink); font-weight: 600; }
 .saving a { color: var(--bronze); font-weight: 600; text-decoration: none; border-bottom: 1px solid rgba(197,155,79,0.55); padding-bottom: 1px; transition: color .2s ease, border-color .2s ease; }
