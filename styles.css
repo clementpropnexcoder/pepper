@@ -335,9 +335,9 @@ em { font-style: italic; }
   .film-player { width: min(320px, 80vw); }
 }
 
-/* ===================== PROPERTY SPOTLIGHT (Dunearn House) ===================== */
+/* ===================== PROPERTY SPOTLIGHT (Thomson Reserve) ===================== */
 .spotlight { position: relative; background: linear-gradient(180deg, #F3ECDD 0%, #E9DFCB 100%); color: var(--ink); padding-block: var(--pad-y); overflow: hidden; }
-.spot-bg { position: absolute; inset: -8%; background: url("assets/spotlight/dunearn-bg.jpg") center/cover no-repeat; opacity: 0.09; animation: spotDrift 28s ease-in-out infinite alternate; will-change: transform; }
+.spot-bg { position: absolute; inset: -8%; background: url("assets/spotlight/tr-bg.jpg") center/cover no-repeat; opacity: 0.13; animation: spotDrift 28s ease-in-out infinite alternate; will-change: transform; }
 @keyframes spotDrift { from { transform: scale(1.04) translate(0, 0); } to { transform: scale(1.16) translate(-3%, -2.5%); } }
 .spot-scrim { position: absolute; inset: 0; background: radial-gradient(130% 120% at 28% 18%, rgba(247,244,238,0.35), rgba(233,223,203,0.78)); }
 .spot-inner { position: relative; z-index: 2; display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px, 5vw, 64px); align-items: center; }
@@ -359,10 +359,31 @@ em { font-style: italic; }
 .saving b { display: block; font-family: var(--display); font-weight: 800; font-size: clamp(1.8rem, 3.2vw, 2.6rem); color: var(--gold); letter-spacing: -0.02em; line-height: 1; }
 .saving b small { font-size: 0.4em; font-weight: 700; color: rgba(197,155,79,0.75); letter-spacing: 0; }
 .saving span { display: block; margin-top: 9px; font-size: 0.92rem; color: var(--muted); max-width: 28ch; }
+.spot-facts { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(16px, 2.6vw, 34px); margin-top: clamp(28px, 4vw, 46px); padding-top: clamp(24px, 3.4vw, 34px); border-top: 1px solid rgba(92,74,52,0.18); }
+.fact b { display: block; font-family: var(--display); font-weight: 800; font-size: clamp(1.5rem, 2.6vw, 2.1rem); color: var(--bronze); letter-spacing: -0.02em; line-height: 1; }
+.fact span { display: block; margin-top: 8px; font-size: 0.88rem; color: var(--muted); max-width: 24ch; }
+
+/* land-cost chart is tall; the vertical film sits beside it */
+.tr-nets { grid-template-columns: 1.08fr 0.92fr; align-items: center; }
+.spot-video h3 { font-family: var(--display); font-weight: 800; color: var(--bronze); font-size: clamp(1.5rem, 2.8vw, 2.15rem); line-height: 1.08; letter-spacing: -0.02em; margin: 0 0 1rem; }
+.spot-vsub { color: var(--muted); max-width: 34ch; margin: 0 0 1.8rem; }
+.vid-frame { width: min(330px, 78vw); }
+.vid-frame video { width: 100%; height: auto; display: block; background: #000; border: 1px solid rgba(197,155,79,0.45); box-shadow: 0 26px 64px rgba(40,55,41,0.24); }
+
+.spot-savings-lead { color: var(--muted); max-width: 62ch; margin: -0.3rem 0 1.9rem; }
+.spot-foot { margin: clamp(22px, 3vw, 30px) 0 0; font-size: 0.82rem; line-height: 1.65; color: var(--muted); max-width: 78ch; }
+.spot-foot em { color: rgba(92,74,52,0.7); font-style: italic; }
+.saving em { font-style: italic; color: var(--bronze); font-weight: 600; }
+
+@media (max-width: 1040px) {
+  .spot-facts { grid-template-columns: repeat(2, 1fr); row-gap: 26px; }
+}
+
 @media (max-width: 860px) {
   .spot-inner { grid-template-columns: 1fr; }
-  .spot-nets { grid-template-columns: 1fr; gap: 30px; }
+  .spot-nets, .tr-nets { grid-template-columns: 1fr; gap: 30px; }
   .savings-grid { grid-template-columns: 1fr; gap: 18px; }
+  .spot-video { display: grid; justify-items: start; }
 }
 @media (prefers-reduced-motion: reduce) { .spot-bg { animation: none; } }
 
