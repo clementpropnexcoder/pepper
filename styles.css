@@ -104,11 +104,25 @@ em { font-style: italic; }
 .hero-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 28%; }
 .hero-scrim { position: absolute; inset: 0; background:
     linear-gradient(180deg, rgba(31,27,22,0.55) 0%, rgba(31,27,22,0.15) 34%, rgba(31,27,22,0.55) 72%, rgba(31,27,22,0.88) 100%),
-    linear-gradient(90deg, rgba(40,55,41,0.55) 0%, rgba(40,55,41,0) 55%); }
+    linear-gradient(270deg, rgba(40,55,41,0.68) 0%, rgba(40,55,41,0) 62%); }
 .hero-inner { position: relative; max-width: var(--maxw); margin-inline: auto; padding: 0 var(--gutter) clamp(56px, 9vh, 110px); width: 100%; }
 .hero-title { font-family: var(--display); font-weight: 900; color: #fff; font-size: clamp(3.4rem, 13vw, 9.5rem); line-height: 0.86; letter-spacing: -0.035em; margin: 0 0 1.4rem; text-transform: none; }
 .hero-sub { color: rgba(255,255,255,0.9); font-size: clamp(1rem, 1.6vw, 1.2rem); max-width: 38ch; margin: 0 0 2.2rem; }
 .hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 28px; }
+/* Desktop: copy sits in the right column so the portrait stays clear */
+/* Mobile: the copy runs full width, so give the image vertical slack and
+   lift it — puts his head in the top third, above where the copy starts. */
+@media (max-width: 860px) {
+  .hero-bg { height: 132%; top: -32%; bottom: auto; object-position: 30% 0%; }
+  /* the gold eyebrow landed across his mouth at this width */
+  .hero .eyebrow { display: none; }
+}
+@media (min-width: 861px) {
+  .hero-inner { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 640px); }
+  .hero-copy { grid-column: 2; }
+  .hero-title { font-size: clamp(3rem, 7.6vw, 7.4rem); }
+  .hero-sub { max-width: 34ch; }
+}
 
 /* Ranking pill (v1 style, adapted for the dark hero) */
 .rank-pill { display: inline-flex; align-items: center; gap: 10px; background: rgba(197,155,79,0.22); border: 1.5px solid var(--gold-2); border-radius: 999px; padding: 9px 18px; color: #fff; font-size: clamp(0.85rem, 1.1vw, 0.98rem); margin: 0 0 1.8rem; max-width: max-content; -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); box-shadow: 0 0 20px rgba(217,175,99,0.4), 0 0 46px rgba(217,175,99,0.22); animation: pillGlow 2.8s ease-in-out infinite; }
@@ -120,7 +134,11 @@ em { font-style: italic; }
 }
 /* On larger screens, pin the rank pill to the top-right, vertically centred on "Plan." */
 @media (min-width: 760px) {
-  .rank-pill { position: absolute; top: clamp(3.4rem, 6.4vw, 6.2rem); right: var(--gutter); margin: 0; z-index: 3; }
+  .rank-pill { position: absolute; top: 0; left: var(--gutter); right: auto; margin: 0; z-index: 3;
+    background: linear-gradient(rgba(197,155,79,0.26), rgba(197,155,79,0.26)), rgba(31,27,22,0.66);
+    border-width: 2px; padding: 12px 22px; font-size: clamp(0.92rem, 1.15vw, 1.05rem);
+    box-shadow: 0 0 26px rgba(217,175,99,0.55), 0 0 62px rgba(217,175,99,0.3), 0 12px 30px rgba(0,0,0,0.4); }
+  .rank-pill svg { width: 21px; height: 21px; }
 }
 .hero-rank { position: absolute; top: calc(var(--nav-h) + 18px); right: var(--gutter); color: rgba(255,255,255,0.85); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; border-left: 2px solid var(--gold); padding-left: 12px; max-width: 190px; line-height: 1.5; }
 
